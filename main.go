@@ -4,13 +4,17 @@ import (
 	_ "embed"
 	"encoding/csv"
 	"fmt"
+	"image"
+	"image/color"
+	"image/jpeg"
 	"io"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 )
 
-const minPopulation = 1e6
+const minPopulation = 0
 
 //go:embed "worldcities.csv"
 var cities_csv string
@@ -77,5 +81,30 @@ func init() {
 }
 
 func main() {
-	fmt.Println()
+	var points []northeast
+	for i := range cities {
+		xyz := cities[i].XYZ(1.0) // take radius of Earth as unit
+		if xyz.x < 0 {
+			continue
+		}
+		xyz.x += 5
+		_, ne := xyz.NorthEast()
+		points = append(points, ne)
+	}
+
+	const size = 500
+	view := degToRad(deg(20))
+
+	img := image.NewPaletted(
+		image.Rect(0, 0, 2*size+1, 2*size+1),
+		[]color.Color{color.White, color.Black})
+
+	for _, p := range points {
+		x := p.east / view
+		y := p.north / view
+		img.SetColorIndex(size + int(x*size+0.5), size - int(y*size+0.5), 1)
+	}
+
+	jpeg.Encode(os.Stdout, img, nil)
+	fmt.Fprintf(os.Stderr, "done")
 }
