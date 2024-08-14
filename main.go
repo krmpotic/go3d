@@ -7,7 +7,6 @@ import (
 
 	//	"image/jpeg"
 	"image/gif"
-	"math"
 	"os"
 )
 
@@ -29,13 +28,14 @@ func northEastImage(points []northeast) *image.Paletted {
 
 func main() {
 	const (
-		nframes = 720
-		delay   = 5
+		nframes     = 360
+		degPerFrame = deg(1)
+		delay       = 5
 	)
 	anim := gif.GIF{LoopCount: nframes}
 
 	for f := 0; f < nframes; f++ {
-		rot := float64(f) / 360 * 2 * math.Pi
+		rot := float64(f) * degPerFrame.Rad()
 		var points []northeast
 		for i := range cities {
 			xyz := cities[i].rotateEast(rot).XYZ(1.0) // take radius of Earth as unit
