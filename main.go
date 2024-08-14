@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"image"
 	"image/color"
+
 	//	"image/jpeg"
 	"image/gif"
 	"io"
@@ -104,9 +105,10 @@ func main() {
 	anim := gif.GIF{LoopCount: nframes}
 
 	for f := 0; f < nframes; f++ {
+		rot := float64(f) / 360 * Tau
 		var points []northeast
 		for i := range cities {
-			xyz := cities[i].East(float64(f) / 360 * Tau).XYZ(1.0) // take radius of Earth as unit
+			xyz := cities[i].East(rot).XYZ(1.0) // take radius of Earth as unit
 			if xyz.x < 0 {
 				continue
 			}
