@@ -2,7 +2,6 @@ package main
 
 import (
 	_ "embed"
-	"fmt"
 	"math"
 )
 
@@ -12,10 +11,6 @@ type northeast struct {
 
 type xyz struct {
 	x, y, z float64
-}
-
-func (c xyz) String() string {
-	return fmt.Sprintf("[%f %f %f]", c.x, c.y, c.z)
 }
 
 func (c northeast) XYZ(r float64) xyz {
@@ -48,10 +43,6 @@ func (c xyz) NorthEast() (r float64, ne northeast) {
 
 	ne.north, ne.east = north, east
 	return
-}
-
-func (c northeast) String() string {
-	return fmt.Sprintf("N%v E%v", radToDeg(c.north), radToDeg(c.east))
 }
 
 func toPiRange(a float64) float64 {
