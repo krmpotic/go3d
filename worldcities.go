@@ -9,8 +9,6 @@ import (
 	"strings"
 )
 
-const minPopulation = 0
-
 //go:embed "worldcities.csv"
 var cities_csv string
 
@@ -68,8 +66,6 @@ func init() {
 				c.population, _ = strconv.Atoi(f)
 			}
 		}
-		if c.population >= minPopulation {
-			cities = append(cities, c)
-		}
+		cities = append(cities, c)
 	}
 }
