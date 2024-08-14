@@ -6,8 +6,6 @@ import (
 	"math"
 )
 
-const Tau = 2 * math.Pi
-
 type northeast struct {
 	north, east float64
 }
@@ -57,11 +55,11 @@ func (c northeast) String() string {
 }
 
 func toPiRange(a float64) float64 {
-	a = math.Mod(a, Tau)
-	if a <= -Tau/2 {
-		a += Tau
-	} else if a > Tau/2 {
-		a -= Tau
+	a = math.Mod(a, 2*math.Pi)
+	if a <= -math.Pi {
+		a += 2 * math.Pi
+	} else if a > math.Pi {
+		a -= 2 * math.Pi
 	}
 	return a
 }
