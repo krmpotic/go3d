@@ -14,6 +14,6 @@ func radToDeg(r float64) deg {
 	return deg(r / Tau * 360)
 }
 
-func degToRad(d deg) float64 {
+func (d deg) Rad() float64 {
 	return float64(d) / 360 * Tau
 }

@@ -61,10 +61,10 @@ func init() {
 				c.city_ascii = f
 			case "lat":
 				d, _ := strconv.ParseFloat(f, 64)
-				c.north = degToRad(deg(d))
+				c.north = deg(d).Rad()
 			case "lng":
 				d, _ := strconv.ParseFloat(f, 64)
-				c.east = degToRad(deg(d))
+				c.east = deg(d).Rad()
 			case "country":
 				c.country = f
 			case "iso3":
@@ -83,7 +83,7 @@ func init() {
 
 func northEastImage(points []northeast) *image.Paletted {
 	const size = 500
-	view := degToRad(deg(20))
+	view := deg(20).Rad()
 
 	img := image.NewPaletted(
 		image.Rect(0, 0, 2*size+1, 2*size+1),
