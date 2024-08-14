@@ -109,7 +109,7 @@ func main() {
 		rot := float64(f) / 360 * 2 * math.Pi
 		var points []northeast
 		for i := range cities {
-			xyz := cities[i].East(rot).XYZ(1.0) // take radius of Earth as unit
+			xyz := cities[i].rotateEast(rot).XYZ(1.0) // take radius of Earth as unit
 			if xyz.x < 0 {
 				continue
 			}

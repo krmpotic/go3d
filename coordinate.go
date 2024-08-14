@@ -26,7 +26,7 @@ func (c northeast) XYZ(r float64) xyz {
 	return xyz{x: x, y: y, z: z}
 }
 
-func (c northeast) East(r float64) northeast {
+func (c northeast) rotateEast(r float64) northeast {
 	return northeast{north: c.north, east: toPiRange(c.east + r)}
 }
 
